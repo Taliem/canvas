@@ -42,6 +42,8 @@
     var brickOffsetTop = 30;
     var brickOffsetLeft = 30;
 
+    var count = 0
+
     var bricks = []
     for (var c = 0; c < brickColumnCount; c++) {
         bricks[c] = []
@@ -121,10 +123,16 @@
                 if (x + dx + ballRadius > brick.x && x + dx < brick.x + brickWidth + ballRadius){
                     if (y + dy + ballRadius < brick.y + brickHeight && y + dy + ballRadius > brick.y){
                         if (brick.draw) {
+                            count += 1
                             brick.draw = false;
                             dy = -dy;
                         }
                         // dy = -dy;
+                        if (count === brickColumnCount * brickRowCount){
+                            clearInterval(game);
+                            alert("mmmonster kill!!!");
+                            document.location.reload();
+                        }
                     }
                 } 
             }
