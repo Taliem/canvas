@@ -118,10 +118,13 @@
         for (var c = 0; c < brickColumnCount; c++) {
             for (var r = 0; r < brickRowCount; r++) {
                 brick = bricks[c][r];
-                if (x + dx + ballRadius + ballRadius> brick.x && x + dx + ballRadius < brick.x + brickWidth + ballRadius){
-                    if (y + dy < brick.y + brickHeight && y + dy > brick.y){
-                        brick.draw = false;
-                        dy = -dy;
+                if (x + dx + ballRadius > brick.x && x + dx < brick.x + brickWidth + ballRadius){
+                    if (y + dy + ballRadius < brick.y + brickHeight && y + dy + ballRadius > brick.y){
+                        if (brick.draw) {
+                            brick.draw = false;
+                            dy = -dy;
+                        }
+                        // dy = -dy;
                     }
                 } 
             }
