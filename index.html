@@ -7,7 +7,11 @@
         body {
             background-image: url("https://pre00.deviantart.net/f0f4/th/pre/f/2012/135/e/7/amazing_horse_trace_by_deepfry3-d4ztu0u.png");
             background-repeat: no-repeat;
-        }    
+        }
+        #player {
+            display: block;
+            margin: 10px auto;
+        }   
     </style>
 </head>
 <body>
@@ -186,7 +190,12 @@
     setInterval(function(){brickColor = randomColor()}, 3000)
 </script>
 
-<audio src="https://psv4.vkuseraudio.net/c4599/u12255777/audios/b0b1e31a5324.mp3?extra=zHCavjMu3WqgzlKhqmsDzFK5P1g3q7ymYZEpaDDR8Xjwgnc67HL0TL5Bt15FtaA3EiFauyGnFiDjYEcIsiU9CIHI0MExr6kvSRDcpOznClsUDUlgaSVGICizeMLNo7os_iTAoisnlJiuEg" autoplay></audio>
-
+<audio autoplay controls id="player">
+    <source src="https://psv4.vkuseraudio.net/c4599/u12255777/audios/b0b1e31a5324.mp3?extra=zHCavjMu3WqgzlKhqmsDzFK5P1g3q7ymYZEpaDDR8Xjwgnc67HL0TL5Bt15FtaA3EiFauyGnFiDjYEcIsiU9CIHI0MExr6kvSRDcpOznClsUDUlgaSVGICizeMLNo7os_iTAoisnlJiuEg">
+</audio>
+<script>
+    var music = document.getElementById("player");
+    music.volume = 0.2;
+</script>
 </body>
 </html>
