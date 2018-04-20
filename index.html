@@ -90,12 +90,16 @@
         y += dy;
 
         if(y + dy < ballRadius) {
-            // dy -= (-4);
             dy = -dy;
             colorBall = randomColor();
         } else if(y + dy > canvas.height - ballRadius) {
-            if(x > paddleX && x < paddleX + paddleWidth) {
-                // dy += 4;
+            if((x > paddleX && x + ballRadius < paddleX + paddleWidth) && (y + dy > paddleHeight)) {
+                if ((Math.floor(Math.random()*10) % 2) === 0) {
+                    dx = Math.floor(Math.random() * 4) + 1
+                } else {
+                    dx = -(Math.floor(Math.random() * 4)+ 1)
+                }
+                console.log(dx)
                 dy = -dy;
             } else {
                 clearInterval(game);
@@ -110,10 +114,10 @@
         }
 
         if(rightPressed && paddleX < canvas.width-paddleWidth) {
-            paddleX += 5;   
+            paddleX += 8;   
         }
         else if(leftPressed && paddleX > 0) {
-            paddleX -= 5;
+            paddleX -= 8;
         }
 
         // collisions
@@ -127,7 +131,6 @@
                             brick.draw = false;
                             dy = -dy;
                         }
-                        // dy = -dy;
                         if (count === brickColumnCount * brickRowCount){
                             clearInterval(game);
                             alert("mmmonster kill!!!");
@@ -136,6 +139,7 @@
                     }
                 } 
             }
+        // console.log(dy)
         }
     }
     function randomColor() {
@@ -174,7 +178,7 @@
     
 </script>
 
-<audio src="https://psv4.vkuseraudio.net/c4594/u5451185/audios/968f7e6ee0fd.mp3?extra=meDSzumbzTqS8N_wNg0FJIQBjtnZl27ZLmyOLTVJWg8qLpruiYEjzklH8_a8RCvpleWVwq-l-MZ-QB3Vi1klj2NtYKKzYtQPkRvonVTxnHUMEDpsph6bqpvkKHnpEfGzIG5Pv6gApk6MVwLm" autoplay></audio>
+<!-- <audio src="https://psv4.vkuseraudio.net/c4594/u5451185/audios/968f7e6ee0fd.mp3?extra=meDSzumbzTqS8N_wNg0FJIQBjtnZl27ZLmyOLTVJWg8qLpruiYEjzklH8_a8RCvpleWVwq-l-MZ-QB3Vi1klj2NtYKKzYtQPkRvonVTxnHUMEDpsph6bqpvkKHnpEfGzIG5Pv6gApk6MVwLm" autoplay></audio> -->
 
 </body>
 </html>
