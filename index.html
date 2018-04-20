@@ -23,13 +23,15 @@
     var y = canvas.height-30;
     var dx = -2;
     var dy = 2;
-    var colorBall = "#0095DD";
+    var colorBall = randomColor();
 
     var paddleHeight = 10;
     var paddleWidth = 75;
     var paddleX = (canvas.width-paddleWidth)/2;
     var rightPressed = false;
     var leftPressed = false;
+    var paddleColor = randomColor();
+
 
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
@@ -41,7 +43,8 @@
     var brickPadding = 10;
     var brickOffsetTop = 30;
     var brickOffsetLeft = 30;
-
+    var brickColor = randomColor();
+    
     var count = 0
 
     var bricks = []
@@ -93,13 +96,15 @@
             dy = -dy;
             colorBall = randomColor();
         } else if(y + dy > canvas.height - ballRadius) {
-            if((x > paddleX && x + ballRadius < paddleX + paddleWidth) && (y + dy > paddleHeight)) {
+            if((x > paddleX && x < paddleX + paddleWidth) && (y + dy > canvas.height - paddleHeight)) {
                 if ((Math.floor(Math.random()*10) % 2) === 0) {
                     dx = Math.floor(Math.random() * 4) + 1
                 } else {
                     dx = -(Math.floor(Math.random() * 4)+ 1)
                 }
                 // console.log(dx)
+                paddleColor = randomColor();
+                colorBall = randomColor();
                 dy = -dy;
             } else {
                 clearInterval(game);
@@ -129,6 +134,7 @@
                         if (brick.draw) {
                             count += 1
                             brick.draw = false;
+                            colorBall = randomColor();
                             dy = -dy;
                         }
                         if (count === brickColumnCount * brickRowCount){
@@ -155,8 +161,9 @@
     function drawPaddle() {
         ctx.beginPath();
         ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = paddleColor;
         ctx.fill();
+        ctx.stroke();
         ctx.closePath();
     }
     function drawBrick() {
@@ -167,15 +174,16 @@
                 if (brick.draw) {
                     ctx.beginPath();
                     ctx.rect(brick.x, brick.y, brickWidth, brickHeight);
-                    ctx.fillStyle = "#0095dd";
+                    ctx.fillStyle = brickColor;
                     ctx.fill();
+                    ctx.stroke();
                     ctx.closePath();
                 }
             }
         }
     }
     var game = setInterval(draw, 20);
-    
+    setInterval(function(){brickColor = randomColor()}, 1000)
 </script>
 
 <audio src="https://psv4.vkuseraudio.net/c4599/u12255777/audios/b0b1e31a5324.mp3?extra=zHCavjMu3WqgzlKhqmsDzFK5P1g3q7ymYZEpaDDR8Xjwgnc67HL0TL5Bt15FtaA3EiFauyGnFiDjYEcIsiU9CIHI0MExr6kvSRDcpOznClsUDUlgaSVGICizeMLNo7os_iTAoisnlJiuEg" autoplay></audio>
